@@ -3,7 +3,8 @@ import {
   HashRouter,
   NavLink,
   Route, 
-  Routes
+  Routes,
+  useNavigate
 } from 'react-router-dom';
 
 const Index = () => {
@@ -11,7 +12,12 @@ const Index = () => {
   };
 
 const Todo = () => {
-    return <p> ✿ 這是 <b>Todo</b> 頁面 ✿ </p>;
+    return (
+        <>
+        <p> ✿ 這是 <b>Todo</b> 頁面 ✿ </p>
+        <LogOut/>
+        </>
+    )
 };
 const Login = () => {
     return <p> ✿ 這是 <b>登入</b> 頁面 ✿</p>;
@@ -19,6 +25,12 @@ const Login = () => {
 const Register = () => {
     return <p> ✿ 這是 <b>註冊</b> 頁面 ✿</p>;
 };
+const LogOut = () => {
+    const navigate = useNavigate();
+    return (
+        <button onClick={ () => {navigate('/login')} }>登出</button>
+    )
+  };
 
 function App() {
   return (
