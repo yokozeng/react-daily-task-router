@@ -4,7 +4,9 @@ import {
   NavLink,
   Route, 
   Routes,
-  useNavigate
+  useNavigate,
+  useParams,
+  Outlet
 } from 'react-router-dom';
 
 const Index = () => {
@@ -32,6 +34,22 @@ const LogOut = () => {
     )
   };
 
+const Post = () => {
+    const navigate = useNavigate();
+    return <>
+    <p> ✿ 這是 <b>Post </b> 頁面 ✿</p>
+    <button onClick={ () => { navigate('/post/post123');}}>查看Post 123</button>
+    <button onClick={ () => { navigate('/post/post456');}}>查看Post 456</button>
+    <button onClick={ () => { navigate('/post/post789');}}>查看Post 789</button>
+    <Outlet />
+    </> 
+};
+
+const PostPage = () => {
+    let params = useParams ();
+    return <p>Post ID:{ params.postId }</p>
+} 
+
 function App() {
   return (
     <div className="container">
@@ -49,6 +67,9 @@ function App() {
           <NavLink to="/todo">
             <p>Todo 頁面</p>
           </NavLink>
+          <NavLink to="/post">
+            <p>Post詳細頁面</p>
+          </NavLink>
         </div>
         {/* Routes, Route 練習區 */}
         <Routes>
@@ -56,6 +77,9 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/todo" element={<Todo />} />
+            <Route path="/post" element={<Post />}>
+                <Route path=":postId" element={<PostPage />}/>
+            </Route>
         </Routes>
         {/* 練習區 */}
       </HashRouter>
